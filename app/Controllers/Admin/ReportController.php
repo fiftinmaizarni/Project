@@ -141,9 +141,8 @@ public function exportCertificates()
 
     $row = 2;
     foreach ($data as $item) {
-        $namaFile = $item['gambar']
-            ? basename($item['gambar'])
-            : '';
+        // Tampilkan nama sertifikat sebagai kolom 'Nama File' sesuai permintaan
+        $namaFile = $item['nama_sertifikat'];
 
         $sheet->fromArray([
             $item['id'],
