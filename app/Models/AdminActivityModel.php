@@ -7,30 +7,44 @@ use CodeIgniter\I18n\Time;
 
 class AdminActivityModel extends Model
 {
-    protected $table = 'admin_activity';
+    protected $table      = 'admin_activity';
     protected $primaryKey = 'id';
+
     protected $allowedFields = [
         'admin_id',
-        'activity',
+        'action',       // ✔ sesuai kolom database
         'module',
         'target_id',
         'description',
         'created_at'
     ];
 
-    public function log($adminId, $activity, $module = null, $targetId = null, $description = null)
-    {
+    protected $useTimestamps = false;
+
+    /**
+     * Simpan log aktivitas admin
+     */
+    public function log(
+        int $adminId,
+        string $action,
+        ?string $module = null,
+        ?int $targetId = null,
+        ?string $description = null
+    ) {
         return $this->insert([
-            'admin_id'   => $adminId,
-            'activity'   => $activity,
-            'module'     => $module,
-            'target_id'  => $targetId,
-            'description'=> $description,
-            'created_at' => Time::now()->toDateTimeString(),
+            'admin_id'    => $adminId,
+            'action'      => $action,
+            'module'      => $module,
+            'target_id'   => $targetId,
+            'description' => $description,
+            'created_at'  => Time::now()->toDateTimeString(),
         ]);
     }
 
-    public function getWeeklyActivity($month, $year)
+    /**
+     * Ambil statistik aktivitas mingguan (4 minggu)
+     */
+    public function getWeeklyActivity(int $month, int $year): array
     {
         $result = [];
         $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
