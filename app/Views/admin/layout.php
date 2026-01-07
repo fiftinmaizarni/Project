@@ -163,6 +163,89 @@
     });
 </script>
 
+<!-- Global confirm modal -->
+<div id="confirmModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md">
+        <div class="px-6 py-4">
+            <h3 class="text-lg font-semibold text-gray-800">Konfirmasi</h3>
+        </div>
+        <div class="px-6 py-2 text-gray-700" id="confirmModalMessage">Apakah Anda yakin?</div>
+        <div class="px-6 py-4 flex justify-end space-x-2">
+            <button id="confirmCancel" class="px-4 py-2 bg-gray-200 rounded">Batal</button>
+            <button id="confirmOk" class="px-4 py-2 bg-blue-600 text-white rounded">Oke</button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let modal = document.getElementById('confirmModal');
+    let msgEl = document.getElementById('confirmModalMessage');
+    let okBtn = document.getElementById('confirmOk');
+    let cancelBtn = document.getElementById('confirmCancel');
+    let pendingAction = null;
+
+    function openConfirm(message, action) {
+        msgEl.textContent = message || 'Apakah Anda yakin?';
+        pendingAction = action;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closeConfirm() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        pendingAction = null;
+    }
+
+    cancelBtn.addEventListener('click', function () {
+        closeConfirm();
+    });
+
+    okBtn.addEventListener('click', function () {
+        if (!pendingAction) return closeConfirm();
+
+        // If action is a link, navigate
+        if (pendingAction.tagName === 'A') {
+            window.location = pendingAction.getAttribute('href');
+            return;
+        }
+
+        // If action is a button inside a form, submit the form
+        if (pendingAction.tagName === 'BUTTON' || pendingAction.tagName === 'INPUT') {
+            let form = pendingAction.closest('form');
+            if (form) form.submit();
+            else pendingAction.click();
+            return;
+        }
+
+        // Fallback: if provided a function
+        if (typeof pendingAction === 'function') pendingAction();
+    });
+
+    // Delegate for delete links
+    document.body.addEventListener('click', function (e) {
+        const el = e.target.closest('.confirm-delete');
+        if (!el) return;
+        e.preventDefault();
+        const message = el.getAttribute('data-confirm') || 'Yakin ingin menghapus?';
+        openConfirm(message, el);
+    });
+
+    // Delegate for save buttons
+    document.body.addEventListener('click', function (e) {
+        const el = e.target.closest('.confirm-save');
+        if (!el) return;
+        // Only handle submit buttons (type=submit) or anchors that submit
+        if (el.tagName === 'BUTTON' || el.tagName === 'INPUT') {
+            e.preventDefault();
+            const message = el.getAttribute('data-confirm') || 'Yakin ingin menyimpan perubahan?';
+            openConfirm(message, el);
+        }
+    });
+});
+</script>
+
 <?= $this->renderSection('scripts') ?>
 
 </body>

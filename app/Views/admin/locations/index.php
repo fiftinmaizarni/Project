@@ -33,7 +33,7 @@
                         <a href="/admin/locations/edit/<?= $location['id'] ?>" class="text-blue-600 hover:text-blue-800">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="/admin/locations/delete/<?= $location['id'] ?>" class="text-red-600 hover:text-red-800" onclick="return confirm('Yakin ingin menghapus?')">
+                        <a href="/admin/locations/delete/<?= $location['id'] ?>" class="text-red-600 hover:text-red-800 confirm-delete" data-confirm="Yakin ingin menghapus?">
                             <i class="fas fa-trash"></i>
                         </a>
                     </div>

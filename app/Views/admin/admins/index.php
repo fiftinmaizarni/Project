@@ -77,9 +77,9 @@
                                 <i class="fas fa-edit"></i>
                             </a>
 
-                            <a href="<?= site_url('admin/admins/delete/' . $admin['id_admin']) ?>"
-                               onclick="return confirm('Yakin ingin menghapus admin ini?')"
-                               class="text-red-500 hover:text-red-600">
+                                     <a href="<?= site_url('admin/admins/delete/' . $admin['id_admin']) ?>"
+                                         class="text-red-500 hover:text-red-600 confirm-delete"
+                                         data-confirm="Yakin ingin menghapus admin ini?">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </td>

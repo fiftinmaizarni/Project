@@ -89,9 +89,9 @@
                            class="text-blue-600 hover:text-blue-900 mr-3" title="Edit">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="<?= base_url('admin/documents/delete/' . $doc['id']); ?>" 
-                           class="text-red-600 hover:text-red-900"
-                           onclick="return confirm('Yakin ingin menghapus dokumen ini?')" title="Hapus">
+                                <a href="<?= base_url('admin/documents/delete/' . $doc['id']); ?>" 
+                                    class="text-red-600 hover:text-red-900 confirm-delete"
+                                    data-confirm="Yakin ingin menghapus dokumen ini?" title="Hapus">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>

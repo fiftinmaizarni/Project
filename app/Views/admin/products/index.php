@@ -107,8 +107,8 @@
 
                         <a
                             href="/admin/products/delete/<?= $product['id'] ?>"
-                            class="text-red-600 hover:text-red-900"
-                            onclick="return confirm('Yakin ingin menghapus?')"
+                            class="text-red-600 hover:text-red-900 confirm-delete"
+                            data-confirm="Yakin ingin menghapus?"
                         >
                             <i class="fas fa-trash"></i>
                         </a>

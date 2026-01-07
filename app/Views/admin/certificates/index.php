@@ -26,8 +26,8 @@
             </div>
             <h3 class="text-lg font-bold text-gray-800 mb-4"><?= esc($cert['nama_sertifikat']) ?></h3>
             <a href="/admin/certificates/delete/<?= $cert['id'] ?>" 
-                class="inline-block bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                onclick="return confirm('Yakin ingin menghapus?')">
+                class="inline-block bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 confirm-delete"
+                data-confirm="Yakin ingin menghapus?">
                 <i class="fas fa-trash mr-2"></i>Hapus
             </a>
         </div>

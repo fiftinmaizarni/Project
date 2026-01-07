@@ -77,7 +77,7 @@
             </div>
 
             <div class="flex space-x-4">
-                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
+                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 confirm-save" data-confirm="Yakin ingin menyimpan produk ini?">
                     Simpan Produk
                 </button>
                 <a href="/admin/products" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300">
